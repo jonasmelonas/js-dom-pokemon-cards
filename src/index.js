@@ -1,6 +1,6 @@
 
 const pokemonData = data;
-const cardList = document.getElementsByClassName("cards")
+const cardList = document.querySelector("#cards")
 
 function generateCards() {
     cardList.innerHTML = ""
@@ -27,9 +27,25 @@ function generateCards() {
             statsList.appendChild(statitem)
         })
 
+        const appearanceTitle = document.createElement("h2")
+        appearanceTitle.textContent = "Game appearances:"
+
+        const appearanceList = document.createElement("ul")
+
+        pokemon.game_indices.forEach(appearance => {
+            const appearanceItem = document.createElement("li")
+            appearanceItem.textContent = `${appearance.version.name}`
+            appearanceList.appendChild(appearanceItem)
+        })
+
+        const gameAppeared = document.createElement("h3")
+        gameAppeared.textContent = `First game appearance: ${pokemon.game_indices[0].version.name}`
+
         item.appendChild(title)
         item.appendChild(img)
         item.appendChild(statsList)
+        item.appendChild(appearanceTitle)
+        item.appendChild(appearanceList)
         
         return item
     })
@@ -37,7 +53,7 @@ function generateCards() {
 
 function main() {
     generateCards().forEach(card => {
-        cardList[0].appendChild(card)
+        cardList.appendChild(card)
     })
 }
 
